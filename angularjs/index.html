@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./public/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/29b41ee1c8.js" crossorigin="anonymous"></script>
+</head>
+<body ng-app="myApp">
+    <div ng-view></div>
+    <ul>
+        <li>
+            <a href="#do">Đỏ</a>
+        </li>
+        <li>
+            <a href="#xanh">Xanh</a>
+        </li>
+        <li>
+            <a href="#vang">Vàng</a>
+        </li>
+        <li>
+            <a href="#vang-nhat">Trang khác</a>
+        </li>
+    </ul>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-route/1.8.2/angular-route.min.js" integrity="sha512-5zOAub3cIpqklnKmM05spv4xttemFDlbBrmRexWiP0aWV8dlayEGciapAjBQWA7lgQsxPY6ay0oIUVtY/pivXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        let app = angular.module("myApp", ["ngRoute"]);
+        app.config(($routePrivider) => {
+            $routePrivider
+            .when("/do", {
+                templateUrl: "screens/red.html"
+            })
+            .when("/xanh", {
+                templateUrl: "screens/green.html"
+            })
+            .when("/vang", {
+                templateUrl: "screens/yellow.html"
+            })
+            .otherwise({
+                templateUrl: "screens/404.html"
+            })
+        })
+    </script>
+</body>
+</html>
