@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+</head>
+<body ng-app="asm1">
+    
+
+    <div class="container">
+        <ul>
+            <li>
+                <a href="#!/">Trang chủ</a>
+            </li>
+            <li>
+                <a href="#!1">Đỏ</a>
+            </li>
+            <li>
+                <a href="#!2">Xanh</a>
+            </li>
+            <li>
+                <a href="#!3">Khác</a>
+            </li>
+        </ul>
+        <div ng-view></div>
+    </div>
+
+    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="lib/angular-route/angular-route.min.js"></script>
+    <script>
+        var app = angular.module('asm1', ['ngRoute']);
+        app.config(function($routeProvider){
+            $routeProvider
+            .when("/", {
+                templateUrl: "screens/homepage.html"
+            })
+            .when("/1", {
+                templateUrl: "screens/do.html"
+            })
+            .when("/2", {
+                templateUrl: "screens/xanh.html"
+            })
+            .otherwise({
+                template: "<h2>Đường dẫn không tồn tại</h2>"
+            })
+        });
+    </script>
+</body>
+</html>

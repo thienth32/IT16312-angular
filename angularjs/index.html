@@ -8,8 +8,7 @@
     <link rel="stylesheet" href="./public/css/bootstrap.min.css">
     <script src="https://kit.fontawesome.com/29b41ee1c8.js" crossorigin="anonymous"></script>
 </head>
-<body ng-app="myApp">
-    <div ng-view></div>
+<body ng-app="ngRoutingDemo">
     <ul>
         <li>
             <a href="#do">Đỏ</a>
@@ -24,25 +23,48 @@
             <a href="#vang-nhat">Trang khác</a>
         </li>
     </ul>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-route/1.8.2/angular-route.min.js" integrity="sha512-5zOAub3cIpqklnKmM05spv4xttemFDlbBrmRexWiP0aWV8dlayEGciapAjBQWA7lgQsxPY6ay0oIUVtY/pivXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <div ng-view>
+
+    </div>
+    
+    <script src="./public/core/angular.min.js"></script>
+    <script src="./public/core/angular-route.min.js"></script>
     <script>
-        let app = angular.module("myApp", ["ngRoute"]);
-        app.config(($routePrivider) => {
-            $routePrivider
-            .when("/do", {
-                templateUrl: "screens/red.html"
+        var app = angular.module('ngRoutingDemo', ['ngRoute']);
+
+        app.config(function ($routeProvider) {
+             
+            $routeProvider.when('/', {
+                templateUrl: 'screens/red.html',
+                // controller: 'loginController'
             })
-            .when("/xanh", {
-                templateUrl: "screens/green.html"
+            // .when('student/:username', {
+            .when('xanh', {
+                templateUrl: 'screens/green.html',
+                // controller: 'studentController'
             })
-            .when("/vang", {
-                templateUrl: "screens/yellow.html"
+            .when('vang', {
+                templateUrl: 'screens/yellow.html',
+                // controller: 'studentController'
             })
             .otherwise({
-                templateUrl: "screens/404.html"
-            })
-        })
+                redirectTo: "/"
+            });
+
+        });
+        app.controller("loginController", function ($scope, $location) {
+           
+           $scope.authenticate = function (username) {
+               // write authentication code here.. 
+
+               $location.path('/student/' + username)
+           };
+
+       });
+
+       app.controller("studentController", function ($scope, $routeParams) {
+           $scope.username = $routeParams.username;
+       });
     </script>
 </body>
 </html>
