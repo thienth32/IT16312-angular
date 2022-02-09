@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    
+</head>
+<body ng-app="myapp">
+    <div ng-controller="homectrl">
+        <!-- <h2>{{title}}</h2>
+        <input type="name" ng-model="title" ng-model-options="{updateOn: 'blur'}"> -->
+        <!-- <textarea ng-model="title"></textarea> -->
+        <!-- <select ng-model="title" >
+            <option value="javascript">javascript</option>
+            <option value="PHP">PHP</option>
+            <option value="C-sharp">C-sharp</option>
+            <option value="Java">Java</option>
+        </select> -->
+
+        <form name="b5">
+            <div>
+                <label for="">Email</label>
+                <input type="email" name="email" ng-model="account.email" required>
+                <p style="color: red;" ng-show="b5.email.$dirty && b5.email.$invalid">Email không hợp lệ</p>
+            </div>
+            <div>
+                <label for="">Password</label>
+                <input type="password" name="password" ng-model="account.password" max-length="4" required>
+                <p style="color: red;" ng-show="b5.password.$dirty && b5.password.$invalid">Hãy nhập mật khẩu</p>
+            </div>
+        </form>
+    </div>
+    <script>
+
+        var app = angular.module("myapp", []);
+        app.directive('maxLength', function(){
+            return {
+                required: "ngModel",
+                link: function(scope, elm, attrs, ctrl){
+                    ctrl.$validators.maxLength = function(modelValue, viewValue){
+                        console.log(modelValue, viewValue);
+                        return true;
+                    }
+                }
+            }
+        });
+        app.controller("homectrl", HomeController)
+
+        function HomeController($scope){
+            // $scope.title = "FPT Polytechnic - IT16312 - Angular Js";
+            // $scope.info = {
+            //     name: 'thienth',
+            //     age: 30
+            // };
+
+            $scope.account = {
+                email: "",
+                password: ""
+            }
+        }   
+    </script>
+</body>
+</html>
