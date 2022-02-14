@@ -45,9 +45,9 @@
     <script src="lib/bootstrap/js/bootstrap.min.js"></script>
     <script src="lib/angular/angular.min.js"></script>
     <script src="lib/angular-route/angular-route.min.js"></script>
-    <script src="lib/db/Subjects.js"></script>
-    <script src="lib/db/Quizs/ADAV.js"></script>
+    
     <script>
+        var subjectApiUrl = "http://localhost:3000/subjects";
         var app = angular.module('asm1', ['ngRoute']);
         app.config(function($routeProvider){
             $routeProvider
@@ -67,8 +67,26 @@
             })
         });
 
-        app.controller("HomeController", function($scope){
-            $scope.subjects = GlobalSubjects;
+        app.controller("HomeController", function($scope, $http){
+            $scope.subjects = [];
+            $scope.keyword = "";
+
+            $scope.changeKeyword = function(){
+              $http.get(`${subjectApiUrl}?Name_like=${$scope.keyword}`)
+                .then(function(response){
+                  if(response.statusText == "OK"){
+                    $scope.subjects = response.data;
+                  }
+                })
+            }
+
+            $http.get(subjectApiUrl)
+              .then(function(response) {
+                console.log(response);
+                if(response.statusText == "OK"){
+                  $scope.subjects = response.data;
+                }
+              })
         });
         app.controller("TestProcessController", function($scope, $routeParams){
             $scope.subjects = GlobalSubjects;

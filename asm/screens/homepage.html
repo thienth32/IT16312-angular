@@ -21,6 +21,14 @@
 </div>
 <h3>Danh sách môn học</h3>
 <div class="row">
+  <div class="col-4">
+    <div class="form-group">
+      <label for="">Tìm kiếm</label>
+      <input type="text" ng-model="keyword" ng-keyup="changeKeyword()" placeholder="tìm theo tên môn học">
+    </div>
+  </div>
+</div>
+<div class="row mt3">
     <div class="col-3 mb-3" ng-repeat="sub in subjects">
         <div class="card" >
             <img src="lib/images/logos/{{sub.Logo}}" class="card-img-top" alt="...">
