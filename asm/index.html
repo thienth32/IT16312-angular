@@ -45,6 +45,8 @@
     <script src="lib/bootstrap/js/bootstrap.min.js"></script>
     <script src="lib/angular/angular.min.js"></script>
     <script src="lib/angular-route/angular-route.min.js"></script>
+    <script src="pages/HomeController.js"></script>
+    <script src="pages/TestProcessController.js"></script>
     
     <script>
         var subjectApiUrl = "http://localhost:3000/subjects";
@@ -67,42 +69,8 @@
             })
         });
 
-        app.controller("HomeController", function($scope, $http){
-            $scope.subjects = [];
-            $scope.keyword = "";
-
-            $scope.changeKeyword = function(){
-              $http.get(`${subjectApiUrl}?Name_like=${$scope.keyword}`)
-                .then(function(response){
-                  if(response.statusText == "OK"){
-                    $scope.subjects = response.data;
-                  }
-                })
-            }
-
-            $http.get(subjectApiUrl)
-              .then(function(response) {
-                console.log(response);
-                if(response.statusText == "OK"){
-                  $scope.subjects = response.data;
-                }
-              })
-            console.log(2);
-        });
-        app.controller("TestProcessController", function($scope, $http, $routeParams){
-            $scope.apiUrl = "http://localhost:3000";
-            $scope.questions = [];
-            
-            $http.get(`${$scope.apiUrl}/${$routeParams.subjectId}`)
-              .then(response => {
-                  if(response.statusText == "OK"){
-                    $scope.questions = response.data;
-                    }
-                })
-            // $scope.subjects = GlobalSubjects;
-            // $scope.quizs = eval($routeParams.subjectId + "Questions");
-            console.log($routeParams.subjectId);
-        });
+        app.controller("HomeController", HomeController);
+        app.controller("TestProcessController", TestProcessController);
     </script>
 </body>
 </html>
