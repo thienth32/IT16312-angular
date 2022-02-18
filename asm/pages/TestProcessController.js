@@ -1,14 +1,39 @@
 window.TestProcessController = function($scope, $http, $routeParams){
     $scope.apiUrl = "http://localhost:3000";
     $scope.questions = [];
-    $scope.countAnswers = 0;
     $scope.score = 0;
-    
-    $scope.chooseAnswer = function(ev){
-        // const question = ev.target.getAttribute("q_id");
-        // const answer = ev.target.getAttribute("a_id");
+    $scope.isSubmit = false;
+    $scope.radioChange = function(value){
+        console.log(value)
+    }
 
-        // console.log(question, answer);
+    $scope.countAnswers = function(){
+        var count = 0;
+        $scope.questions.forEach((item, i) => {
+            if(item.userChoose != undefined){
+                count++;
+            }
+        });
+        return count;
+    }
+    
+    $scope.submitExercise = function(){
+        $scope.isSubmit = true;
+        var score = 0;
+        $scope.questions.forEach((item) => {
+            if(item.userChoose != undefined && item.userChoose == item.AnswerId){
+                score += item.Marks
+            }
+        });
+        alert(`Bạn đã đạt ${score} điểm`);
+    }
+
+    $scope.chooseAnswer = function(qId, aId){
+        $scope.questions.forEach((item, index) => {
+            if(item.Id == qId){
+                item.userChoose = aId;
+            }
+        });
     }
 
     $http.get(`${$scope.apiUrl}/${$routeParams.subjectId}`)
@@ -28,7 +53,4 @@ window.TestProcessController = function($scope, $http, $routeParams){
             
             }
         })
-    // $scope.subjects = GlobalSubjects;
-    // $scope.quizs = eval($routeParams.subjectId + "Questions");
-    console.log($routeParams.subjectId);
 }
