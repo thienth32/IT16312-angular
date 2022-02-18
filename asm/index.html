@@ -51,6 +51,18 @@
     <script>
         var subjectApiUrl = "http://localhost:3000/subjects";
         var app = angular.module('asm1', ['ngRoute']);
+        // app .factory('Auth', function(){
+        //   var user = localStorage.getItem('loginUser');
+
+        //   return {
+        //       setUser : function(aUser){
+        //           user = aUser;
+        //       },
+        //       isLoggedIn : function(){
+        //           return(user)? user : false;
+        //       }
+        //     }
+        // })
         app.config(function($routeProvider){
             $routeProvider
             .when("/", {
@@ -61,7 +73,7 @@
                 templateUrl: "screens/kiem-tra.html",
                 controller: "TestProcessController"
             })
-            .when("/2", {
+            .when("/login", {
                 templateUrl: "screens/xanh.html"
             })
             .otherwise({
@@ -69,8 +81,23 @@
             })
         });
 
-        app.controller("HomeController", HomeController);
-        app.controller("TestProcessController", TestProcessController);
+        app.controller("HomeController", ['$scope', '$http', HomeController]);
+        app.controller("TestProcessController", ['$scope', '$http', '$routeParams', TestProcessController]);
+        
+        // app.run(['$rootScope', '$location', 'Auth', function ($rootScope, $location, Auth) {
+        //     $rootScope.$on('$routeChangeStart', function (event) {
+
+        //         if (!Auth.isLoggedIn()) {
+        //             console.log('DENY');
+        //             event.preventDefault();
+        //             $location.path('/login');
+        //         }
+        //         else {
+        //             console.log('ALLOW');
+        //             // $location.path('/');
+        //         }
+        //     });
+        // }]);
     </script>
 </body>
 </html>

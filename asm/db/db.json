@@ -32,7 +32,19 @@
       "birthday": "1993-05-15",
       "schoolfee": "2000000",
       "marks": "0"
+    },
+    {
+      "username": "thienth",
+      "password": "123456",
+      "fullname": "trần hữu thiện",
+      "email": "thienth@gmail.com",
+      "gender": "true",
+      "birthday": "1991-01-01",
+      "schoolfee": "11000",
+      "marks": "8",
+      "id": 4
     }
+    
   ],
   "subjects": [
     {
