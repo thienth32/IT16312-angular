@@ -35,6 +35,9 @@
                   <li class="nav-item">
                     <a class="nav-link" href="#!/dang-nhap">Đăng nhập</a>
                   </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#!/register">Đăng ký</a>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -42,27 +45,17 @@
         <div ng-view></div>
     </div>
 
-    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+    
     <script src="lib/angular/angular.min.js"></script>
     <script src="lib/angular-route/angular-route.min.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
     <script src="pages/HomeController.js"></script>
     <script src="pages/TestProcessController.js"></script>
+    <script src="pages/RegisterController.js"></script>
     
     <script>
         var subjectApiUrl = "http://localhost:3000/subjects";
         var app = angular.module('asm1', ['ngRoute']);
-        // app .factory('Auth', function(){
-        //   var user = localStorage.getItem('loginUser');
-
-        //   return {
-        //       setUser : function(aUser){
-        //           user = aUser;
-        //       },
-        //       isLoggedIn : function(){
-        //           return(user)? user : false;
-        //       }
-        //     }
-        // })
         app.config(function($routeProvider){
             $routeProvider
             .when("/", {
@@ -73,8 +66,12 @@
                 templateUrl: "screens/kiem-tra.html",
                 controller: "TestProcessController"
             })
-            .when("/login", {
-                templateUrl: "screens/xanh.html"
+            // .when("/login", {
+            //     templateUrl: "screens/xanh.html",
+            // })
+            .when("/register", {
+                templateUrl: "screens/register.html",
+                controller: "RegisterController"
             })
             .otherwise({
                 template: "<h2>Đường dẫn không tồn tại</h2>"
@@ -83,21 +80,9 @@
 
         app.controller("HomeController", ['$scope', '$http', HomeController]);
         app.controller("TestProcessController", ['$scope', '$http', '$routeParams', TestProcessController]);
+        app.controller("RegisterController", ["$scope", "$http", RegisterController]);
         
-        // app.run(['$rootScope', '$location', 'Auth', function ($rootScope, $location, Auth) {
-        //     $rootScope.$on('$routeChangeStart', function (event) {
-
-        //         if (!Auth.isLoggedIn()) {
-        //             console.log('DENY');
-        //             event.preventDefault();
-        //             $location.path('/login');
-        //         }
-        //         else {
-        //             console.log('ALLOW');
-        //             // $location.path('/');
-        //         }
-        //     });
-        // }]);
+        
     </script>
 </body>
 </html>

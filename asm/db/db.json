@@ -20,7 +20,9 @@
       "gender": "true",
       "birthday": "1985-10-11",
       "schoolfee": "2500000",
-      "marks": "0"
+      "marks": {
+        "ADAV" : 9 
+      }
     },
     {
       "id": 3,
@@ -43,8 +45,16 @@
       "schoolfee": "11000",
       "marks": "8",
       "id": 4
+    },
+    {
+      "fullname": "thienth",
+      "username": "thienth",
+      "password": "123456",
+      "gender": "true",
+      "birthday": "1990-12-31T17:00:00.000Z",
+      "schoolfee": 100,
+      "id": 5
     }
-    
   ],
   "subjects": [
     {
